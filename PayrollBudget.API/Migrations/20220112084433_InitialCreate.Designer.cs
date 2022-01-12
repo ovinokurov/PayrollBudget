@@ -12,7 +12,7 @@ using PayrollBudget.API.Data;
 namespace PayrollBudget.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220112080636_InitialCreate")]
+    [Migration("20220112084433_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
