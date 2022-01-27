@@ -60,6 +60,7 @@ namespace PayrollBudget.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true),
                     PayPlan = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Series = table.Column<int>(type: "int", nullable: false),
                     Grade = table.Column<int>(type: "int", nullable: false),
@@ -72,6 +73,11 @@ namespace PayrollBudget.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PayrollDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PayrollDetails_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -193,6 +199,11 @@ namespace PayrollBudget.API.Migrations
                 column: "OfficeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PayrollDetails_EmployeeId",
+                table: "PayrollDetails",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Subtotals_OfficeId",
                 table: "Subtotals",
                 column: "OfficeId");
@@ -216,10 +227,10 @@ namespace PayrollBudget.API.Migrations
                 name: "PayrollDetails");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Offices");
 
             migrationBuilder.DropTable(
-                name: "Offices");
+                name: "Employees");
         }
     }
 }

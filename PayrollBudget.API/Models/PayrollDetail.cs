@@ -5,8 +5,8 @@ namespace PayrollBudget.API.Models
     public class PayrollDetail
     {
         public int Id { get; set; }
-        //public int EmployeeId { get; set; }
-        //public Employee? Employee { get; set; }
+        public int? EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
         //public int OfficeId { get; set; }
         //public Office? Office { get; set; }
         //public int SacId { get; set; }

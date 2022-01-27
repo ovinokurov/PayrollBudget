@@ -191,6 +191,9 @@ namespace PayrollBudget.API.Migrations
                     b.Property<DateTime>("DepartureDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FY20Actions")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -214,6 +217,8 @@ namespace PayrollBudget.API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("PayrollDetails");
                 });
@@ -302,6 +307,15 @@ namespace PayrollBudget.API.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("Office");
+                });
+
+            modelBuilder.Entity("PayrollBudget.API.Models.PayrollDetail", b =>
+                {
+                    b.HasOne("PayrollBudget.API.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("PayrollBudget.API.Models.Subtotal", b =>
